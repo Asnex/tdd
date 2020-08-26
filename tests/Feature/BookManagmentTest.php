@@ -6,7 +6,7 @@ use App\Models\Author;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class BookReservationTest extends TestCase
+class BookManagmentTest extends TestCase
 {
     use RefreshDatabase;
     /**
@@ -32,7 +32,7 @@ class BookReservationTest extends TestCase
     {
         $response = $this->post('/books', [
             'title' => '',
-            'author' => 'Danko'
+            'author_id' => 'Danko'
         ]);
 
         $response->assertSessionHasErrors('title');

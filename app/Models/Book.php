@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\Exception;
 
 class Book extends Model
 {
@@ -18,5 +20,34 @@ class Book extends Model
         $this->attributes['author_id'] = (Author::firstOrCreate([
             'name' => $author
         ]))->id;
+    }
+
+    public function checkout(User $user)
+    {
+      $this->reservations()->create([
+          'user_id' => $user->id,
+          'checked_out_at' => now()
+      ]);
+    }
+
+    public function checkin(User $user)
+    {
+        $reservation = $this->reservations()->where('user_id', $user->id)
+                             ->whereNotNull('checked_out_at')
+                             ->whereNull('checked_in_at')
+                             ->first();
+
+        if(is_null($reservation)){
+            throw new \PHPUnit\Util\Exception();
+        }
+
+        $reservation->update([
+           'checked_in_at' => now()
+        ]);
+    }
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
     }
 }
