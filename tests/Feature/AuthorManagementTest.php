@@ -17,7 +17,7 @@ class AuthorManagementTest extends TestCase
     public function an_author_can_be_created()
     {
 
-        $this->withExceptionHandling();
+       // $this->withExceptionHandling();
       $this->post('/author', [
           'name' => 'Author name',
           'dob'  => '05/15/1991'
@@ -29,4 +29,6 @@ class AuthorManagementTest extends TestCase
       $this->assertEquals('1991/15/05',  $author->first()->dob->format('Y/d/m'));
 
     }
+
+
 }
