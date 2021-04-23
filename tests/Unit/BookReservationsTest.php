@@ -45,7 +45,6 @@ class BookReservationsTest extends TestCase
     /** @test */
     public function if_not_checked_out_give_me_exception()
     {
-
         $this->expectException(Exception::class);
         $book = factory(Book::class)->create();
         $user = factory(User::class)->create();
