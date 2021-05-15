@@ -21,15 +21,11 @@ Route::patch("/books/{book}","BookController@update");
 Route::delete("/books/{book}","BookController@destroy");
 
 Route::post('/authors', 'AuthorController@store');
+Route::get('/authors/create', 'AuthorController@create');
 
 Route::post("/checkout/{book}","CheckoutBookController@store");
 Route::post("/checkin/{book}","CheckinBookController@store");
 
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
